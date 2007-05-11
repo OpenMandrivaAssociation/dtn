@@ -1,14 +1,11 @@
-%define snap 20060831
-
 Summary:	Delay Tolerant Networking reference implementation
 Name:		dtn
-Version:	2.2.1
-Release:	%mkrel 0.%{snap}.1
+Version:	2.3.0
+Release:	%mkrel 1
 License:	BSD-like
 Group:		System/Servers
 URL:		http://www.dtnrg.org/
-#Source0:	http://www.dtnrg.org/docs/code/%{name}_%{version}.tar.bz2
-Source0:	dtn_%{version}-20060831.tar.bz2
+Source0:	http://www.dtnrg.org/docs/code/%{name}_%{version}.tgz
 Source1:	dtnd.init
 Source2:	dtnd.logrotate
 Source3:	dtnd.sysconfig
@@ -26,7 +23,7 @@ BuildRequires:	db4-devel
 BuildRequires:	libbluez-devel
 BuildRequires:	libexpat-devel
 BuildRequires:	doxygen
-ExclusiveArch:	i686 i586
+#ExclusiveArch:	i686 i586
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
@@ -44,7 +41,7 @@ of ad-hoc sensor/actuator networks.
 
 %prep
 
-%setup -q -n DTN2
+%setup -q -n dtn_%{version}
 %patch0 -p1
 
 
@@ -81,13 +78,14 @@ sh build-configure.sh
 %configure2_5x \
     --bindir=%{_sbindir} \
     --with-dbver=4.2 \
+    --with-tclver=8.5 \
     --with-bluez \
     --disable-atomic-asm
 
 #    --with-mysql\
 #    --with-postgres \
 
-make OPTIMIZE="%{optflags}" WARN="-Wall -fpermissive -fPIC"
+make
 
 make doxygen
 
@@ -150,7 +148,7 @@ echo "Initializing DTN persistent data store..."
 %files
 %defattr(-,root,root)
 %doc CONTRIBUTING README RELEASE-NOTES STATUS TCA_README oasys/LICENSE README.oasys TODO.oasys
-%doc devel doc/manual doc/*.txt doc/*.html doc/*.cc sim/conf/send-one-bundle.conf
+%doc devel doc/manual doc/*.txt doc/*.html sim/conf/send-one-bundle.conf
 %attr(0755,root,root) %{_initrddir}/dtnd
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/dtn.conf
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/sysconfig/dtnd
@@ -172,5 +170,4 @@ echo "Initializing DTN persistent data store..."
 %attr(0755,dtnd,dtnd) %dir %{_localstatedir}/dtn/dtnperf
 %attr(0755,dtnd,dtnd) %dir %{_localstatedir}/dtn/dtncpd-incoming
 %attr(0755,dtnd,dtnd) %dir /var/log/dtnd
-
 
