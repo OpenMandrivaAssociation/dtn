@@ -1,7 +1,7 @@
 Summary:	Delay Tolerant Networking reference implementation
 Name:		dtn
 Version:	2.3.0
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	BSD-like
 Group:		System/Servers
 URL:		http://www.dtnrg.org/
@@ -44,7 +44,6 @@ of ad-hoc sensor/actuator networks.
 %setup -q -n dtn_%{version}
 %patch0 -p1
 
-
 find . -type d -perm 0700 -exec chmod 755 {} \;
 find . -type f -perm 0555 -exec chmod 755 {} \;
 find . -type f -perm 0444 -exec chmod 644 {} \;
@@ -78,7 +77,11 @@ sh build-configure.sh
 %configure2_5x \
     --bindir=%{_sbindir} \
     --with-dbver=4.2 \
+%if %mdkversion >= 200800
     --with-tclver=8.5 \
+%else
+    --with-tclver=8.4 \
+%endif
     --with-bluez \
     --disable-atomic-asm
 
@@ -170,4 +173,3 @@ echo "Initializing DTN persistent data store..."
 %attr(0755,dtnd,dtnd) %dir %{_localstatedir}/dtn/dtnperf
 %attr(0755,dtnd,dtnd) %dir %{_localstatedir}/dtn/dtncpd-incoming
 %attr(0755,dtnd,dtnd) %dir /var/log/dtnd
-
