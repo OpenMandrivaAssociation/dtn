@@ -1,7 +1,7 @@
 Summary:	Delay Tolerant Networking reference implementation
 Name:		dtn
 Version:	2.3.0
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	BSD-like
 Group:		System/Servers
 URL:		http://www.dtnrg.org/
