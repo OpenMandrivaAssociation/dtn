@@ -10,6 +10,7 @@ Source1:	dtnd.init
 Source2:	dtnd.logrotate
 Source3:	dtnd.sysconfig
 Patch0:		dtn_2.2.1-localstatedir.diff
+Patch1:		dtn-no_werror.diff
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
 Requires(pre): rpm-helper
@@ -43,6 +44,7 @@ of ad-hoc sensor/actuator networks.
 
 %setup -q -n dtn_%{version}
 %patch0 -p1
+%patch1 -p0
 
 find . -type d -perm 0700 -exec chmod 755 {} \;
 find . -type f -perm 0555 -exec chmod 755 {} \;
