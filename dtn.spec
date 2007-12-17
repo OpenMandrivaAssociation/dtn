@@ -25,7 +25,6 @@ BuildRequires:	libbluez-devel
 BuildRequires:	libexpat-devel
 BuildRequires:	doxygen
 #ExclusiveArch:	i686 i586
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
 This package contains the reference implementation of the Delay Tolerant
