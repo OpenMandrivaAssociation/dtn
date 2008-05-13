@@ -1,16 +1,14 @@
 Summary:	Delay Tolerant Networking reference implementation
 Name:		dtn
-Version:	2.3.0
-Release:	%mkrel 3
-License:	BSD-like
+Version:	2.5.0
+Release:	%mkrel 0
+License:	Apache License
 Group:		System/Servers
 URL:		http://www.dtnrg.org/
 Source0:	http://www.dtnrg.org/docs/code/%{name}_%{version}.tgz
 Source1:	dtnd.init
 Source2:	dtnd.logrotate
 Source3:	dtnd.sysconfig
-Patch0:		dtn_2.2.1-localstatedir.diff
-Patch1:		dtn-no_werror.diff
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
 Requires(pre): rpm-helper
@@ -24,8 +22,10 @@ BuildRequires:	db4-devel
 BuildRequires:	libbluez-devel
 BuildRequires:	libexpat-devel
 BuildRequires:	doxygen
+BuildRequires:	python-devel
+BuildRequires:	xerces-c-devel
 #ExclusiveArch:	i686 i586
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 This package contains the reference implementation of the Delay Tolerant
@@ -42,9 +42,7 @@ of ad-hoc sensor/actuator networks.
 
 %prep
 
-%setup -q -n dtn_%{version}
-%patch0 -p1
-%patch1 -p0
+%setup -q -n dtn-%{version}
 
 find . -type d -perm 0700 -exec chmod 755 {} \;
 find . -type f -perm 0555 -exec chmod 755 {} \;
@@ -78,7 +76,7 @@ sh build-configure.sh
 
 %configure2_5x \
     --bindir=%{_sbindir} \
-    --with-dbver=4.2 \
+    --with-dbver=4.6 \
 %if %mdkversion >= 200800
     --with-tclver=8.5 \
 %else
@@ -95,7 +93,9 @@ make
 make doxygen
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
+
+%makeinstall_std
 
 install -d %{buildroot}%{_sysconfdir}/sysconfig
 install -d %{buildroot}%{_sysconfdir}/logrotate.d
@@ -148,7 +148,7 @@ echo "Initializing DTN persistent data store..."
 %_preun_service dtnd
 
 %clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
