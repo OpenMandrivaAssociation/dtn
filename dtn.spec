@@ -101,10 +101,10 @@ install -d %{buildroot}%{_sysconfdir}/sysconfig
 install -d %{buildroot}%{_sysconfdir}/logrotate.d
 install -d %{buildroot}%{_initrddir}
 install -d %{buildroot}%{_sbindir}
-install -d %{buildroot}%{_localstatedir}/dtn/bundles
-install -d %{buildroot}%{_localstatedir}/dtn/db
-install -d %{buildroot}%{_localstatedir}/dtn/dtnperf
-install -d %{buildroot}%{_localstatedir}/dtn/dtncpd-incoming
+install -d %{buildroot}%{_localstatedir}/lib/dtn/bundles
+install -d %{buildroot}%{_localstatedir}/lib/dtn/db
+install -d %{buildroot}%{_localstatedir}/lib/dtn/dtnperf
+install -d %{buildroot}%{_localstatedir}/lib/dtn/dtncpd-incoming
 install -d %{buildroot}/var/log/dtnd
 
 install -m0755 daemon/dtnd %{buildroot}%{_sbindir}/
@@ -134,7 +134,7 @@ cp oasys/README README.oasys
 cp oasys/TODO TODO.oasys
 
 %pre
-%_pre_useradd dtnd %{_localstatedir}/dtn /bin/false
+%_pre_useradd dtnd %{_localstatedir}/lib/dtn /bin/false
 
 %postun
 %_postun_userdel dtnd
@@ -169,9 +169,9 @@ rm -rf %{buildroot}
 %attr(0755,root,root) %{_sbindir}/dtnsend
 %attr(0755,root,root) %{_sbindir}/dtntunnel
 
-%attr(0755,dtnd,dtnd) %dir %{_localstatedir}/dtn
-%attr(0755,dtnd,dtnd) %dir %{_localstatedir}/dtn/bundles
-%attr(0755,dtnd,dtnd) %dir %{_localstatedir}/dtn/db
-%attr(0755,dtnd,dtnd) %dir %{_localstatedir}/dtn/dtnperf
-%attr(0755,dtnd,dtnd) %dir %{_localstatedir}/dtn/dtncpd-incoming
+%attr(0755,dtnd,dtnd) %dir %{_localstatedir}/lib/dtn
+%attr(0755,dtnd,dtnd) %dir %{_localstatedir}/lib/dtn/bundles
+%attr(0755,dtnd,dtnd) %dir %{_localstatedir}/lib/dtn/db
+%attr(0755,dtnd,dtnd) %dir %{_localstatedir}/lib/dtn/dtnperf
+%attr(0755,dtnd,dtnd) %dir %{_localstatedir}/lib/dtn/dtncpd-incoming
 %attr(0755,dtnd,dtnd) %dir /var/log/dtnd
