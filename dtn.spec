@@ -9,6 +9,7 @@ Source0:	http://www.dtnrg.org/docs/code/%{name}_%{version}.tgz
 Source1:	dtnd.init
 Source2:	dtnd.logrotate
 Source3:	dtnd.sysconfig
+Patch0:		dtn-gcc43.diff
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
 Requires(pre): rpm-helper
@@ -43,6 +44,7 @@ of ad-hoc sensor/actuator networks.
 %prep
 
 %setup -q -n dtn-%{version}
+%patch0 -p1
 
 find . -type d -perm 0700 -exec chmod 755 {} \;
 find . -type f -perm 0555 -exec chmod 755 {} \;
@@ -65,8 +67,6 @@ install -m0644 %{SOURCE3} Mandriva/dtnd.sysconfig
 echo "%{version}" > version.dat
 
 %build
-
-#export CPPFLAGS="-I%{_includedir}/mysql -I%{_includedir}/pgsql"
 
 pushd oasys
     sh build-configure.sh
