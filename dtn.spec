@@ -10,6 +10,7 @@ Source1:	dtnd.init
 Source2:	dtnd.logrotate
 Source3:	dtnd.sysconfig
 Patch0:		dtn-gcc43.diff
+Patch1:		dtn-2.5.0-includes.patch
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
 Requires(pre): rpm-helper
@@ -45,6 +46,7 @@ of ad-hoc sensor/actuator networks.
 
 %setup -q -n dtn-%{version}
 %patch0 -p1
+%patch0 -p1 -b .includes
 
 find . -type d -perm 0700 -exec chmod 755 {} \;
 find . -type f -perm 0555 -exec chmod 755 {} \;
