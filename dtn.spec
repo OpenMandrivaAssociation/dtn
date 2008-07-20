@@ -1,7 +1,7 @@
 Summary:	Delay Tolerant Networking reference implementation
 Name:		dtn
 Version:	2.5.0
-Release:	%mkrel 0
+Release:	%mkrel 1
 License:	Apache License
 Group:		System/Servers
 URL:		http://www.dtnrg.org/
@@ -26,7 +26,6 @@ BuildRequires:	libexpat-devel
 BuildRequires:	doxygen
 BuildRequires:	python-devel
 BuildRequires:	xerces-c-devel
-#ExclusiveArch:	i686 i586
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -46,7 +45,7 @@ of ad-hoc sensor/actuator networks.
 
 %setup -q -n dtn-%{version}
 %patch0 -p1
-%patch0 -p1 -b .includes
+%patch1 -p1 -b .includes
 
 find . -type d -perm 0700 -exec chmod 755 {} \;
 find . -type f -perm 0555 -exec chmod 755 {} \;
@@ -103,10 +102,10 @@ install -d %{buildroot}%{_sysconfdir}/sysconfig
 install -d %{buildroot}%{_sysconfdir}/logrotate.d
 install -d %{buildroot}%{_initrddir}
 install -d %{buildroot}%{_sbindir}
-install -d %{buildroot}%{_localstatedir}/lib/dtn/bundles
-install -d %{buildroot}%{_localstatedir}/lib/dtn/db
-install -d %{buildroot}%{_localstatedir}/lib/dtn/dtnperf
-install -d %{buildroot}%{_localstatedir}/lib/dtn/dtncpd-incoming
+install -d %{buildroot}/var/lib/dtn/bundles
+install -d %{buildroot}/var/lib/dtn/db
+install -d %{buildroot}/var/lib/dtn/dtnperf
+install -d %{buildroot}/var/lib/dtn/dtncpd-incoming
 install -d %{buildroot}/var/log/dtnd
 
 install -m0755 daemon/dtnd %{buildroot}%{_sbindir}/
@@ -136,7 +135,7 @@ cp oasys/README README.oasys
 cp oasys/TODO TODO.oasys
 
 %pre
-%_pre_useradd dtnd %{_localstatedir}/lib/dtn /bin/false
+%_pre_useradd dtnd /var/lib/dtn /bin/false
 
 %postun
 %_postun_userdel dtnd
@@ -158,9 +157,11 @@ rm -rf %{buildroot}
 %doc devel doc/manual doc/*.txt doc/*.html sim/conf/send-one-bundle.conf
 %attr(0755,root,root) %{_initrddir}/dtnd
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/dtn.conf
+%attr(0644,root,root) %config(noreplace) %{_sysconfdir}/DS.xsd
+%attr(0644,root,root) %config(noreplace) %{_sysconfdir}/clevent.xsd
+%attr(0644,root,root) %config(noreplace) %{_sysconfdir}/router.xsd
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/sysconfig/dtnd
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/logrotate.d/dtnd
-
 %attr(0755,root,root) %{_sbindir}/dtnd
 %attr(0755,root,root) %{_sbindir}/dtnd-control
 %attr(0755,root,root) %{_sbindir}/dtncat
@@ -170,10 +171,19 @@ rm -rf %{buildroot}
 %attr(0755,root,root) %{_sbindir}/dtnrecv
 %attr(0755,root,root) %{_sbindir}/dtnsend
 %attr(0755,root,root) %{_sbindir}/dtntunnel
-
-%attr(0755,dtnd,dtnd) %dir %{_localstatedir}/lib/dtn
-%attr(0755,dtnd,dtnd) %dir %{_localstatedir}/lib/dtn/bundles
-%attr(0755,dtnd,dtnd) %dir %{_localstatedir}/lib/dtn/db
-%attr(0755,dtnd,dtnd) %dir %{_localstatedir}/lib/dtn/dtnperf
-%attr(0755,dtnd,dtnd) %dir %{_localstatedir}/lib/dtn/dtncpd-incoming
+%attr(0755,root,root) %{_sbindir}/dtnhttpproxy
+%attr(0755,root,root) %{_sbindir}/dtntraceroute
+%attr(0755,root,root) %{_libdir}/libdtnapi++-2.5.0.so
+%attr(0755,root,root) %{_libdir}/libdtnapi++.so
+%attr(0755,root,root) %{_libdir}/libdtnapi-2.5.0.so
+%attr(0755,root,root) %{_libdir}/libdtnapi.so
+%attr(0755,root,root) %{_libdir}/libdtntcl-2.5.0.so
+%attr(0755,root,root) %{_libdir}/libdtntcl.so
+%attr(0755,root,root) %{_libdir}/liboasys.so
+%attr(0755,root,root) %{_libdir}/liboasyscompat.so
+%attr(0755,dtnd,dtnd) %dir /var/lib/dtn
+%attr(0755,dtnd,dtnd) %dir /var/lib/dtn/bundles
+%attr(0755,dtnd,dtnd) %dir /var/lib/dtn/db
+%attr(0755,dtnd,dtnd) %dir /var/lib/dtn/dtnperf
+%attr(0755,dtnd,dtnd) %dir /var/lib/dtn/dtncpd-incoming
 %attr(0755,dtnd,dtnd) %dir /var/log/dtnd
