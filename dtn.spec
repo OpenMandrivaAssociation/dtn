@@ -5,7 +5,7 @@
 Summary:	Delay Tolerant Networking reference implementation
 Name:		dtn
 Version:	2.6.0
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	Apache License
 Group:		System/Servers
 URL:		https://sourceforge.net/projects/dtn/
