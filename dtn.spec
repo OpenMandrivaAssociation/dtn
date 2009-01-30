@@ -15,6 +15,7 @@ Source2:	dtnd.logrotate
 Source3:	dtnd.sysconfig
 Patch0:		dtn-2.6.0-gcc43_glibc28_fixes.diff
 Patch1:		dtn-2.6.0-soname_fixes.diff
+Patch2:		dtn-2.6.0-str-fmt.patch
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
 Requires(pre): rpm-helper
@@ -103,14 +104,12 @@ This package contains the static DTN library and its header files.
 %setup -q -n dtn-%{version}
 %patch0 -p1
 %patch1 -p0
+%patch2 -p0
 
 find . -type d -perm 0700 -exec chmod 755 {} \;
 find . -type f -perm 0555 -exec chmod 755 {} \;
 find . -type f -perm 0444 -exec chmod 644 {} \;
 
-for i in `find . -type d -name CVS` `find . -type f -name .cvs\*` `find . -type f -name .#\*`; do
-    if [ -e "$i" ]; then rm -rf $i; fi >&/dev/null
-done
 
 # strip away annoying ^M
 find . -type f|xargs file|grep 'CRLF'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
