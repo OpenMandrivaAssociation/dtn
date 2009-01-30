@@ -31,7 +31,7 @@ BuildRequires:	openssl-devel
 BuildRequires:	python
 BuildRequires:	python-devel
 BuildRequires:	swig
-BuildRequires:	tcl libtcl-devel
+BuildRequires:	tcl tcl-devel
 BuildRequires:	xerces-c-devel
 BuildRequires:	zlib-devel
 Requires:	tcl
