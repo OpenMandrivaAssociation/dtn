@@ -16,6 +16,7 @@ Source3:	dtnd.sysconfig
 Patch0:		dtn-2.6.0-gcc43_glibc28_fixes.diff
 Patch1:		dtn-2.6.0-soname_fixes.diff
 Patch2:		dtn-2.6.0-str-fmt.patch
+Patch3:		dtn-2.6.0-gcc43.patch
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
 Requires(pre): rpm-helper
@@ -33,7 +34,7 @@ BuildRequires:	python
 BuildRequires:	python-devel
 BuildRequires:	swig
 BuildRequires:	tcl tcl-devel
-BuildRequires:	xerces-c-devel
+BuildRequires:	xerces-c28-devel
 BuildRequires:	zlib-devel
 Requires:	tcl
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -105,6 +106,7 @@ This package contains the static DTN library and its header files.
 %patch0 -p1
 %patch1 -p0
 %patch2 -p0
+%patch3 -p0
 
 find . -type d -perm 0700 -exec chmod 755 {} \;
 find . -type f -perm 0555 -exec chmod 755 {} \;
