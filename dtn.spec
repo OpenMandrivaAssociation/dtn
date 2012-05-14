@@ -25,8 +25,8 @@ BuildRequires:	autoconf
 BuildRequires:	db-devel
 BuildRequires:	doxygen
 BuildRequires:	google-perftools-devel
-BuildRequires:	libbluez-devel
-BuildRequires:	libexpat-devel
+BuildRequires:	bluez-devel
+BuildRequires:	expat-devel
 BuildRequires:	libtool
 BuildRequires:	oasys-devel
 BuildRequires:	openssl-devel
