@@ -5,7 +5,7 @@
 Summary:	Delay Tolerant Networking reference implementation
 Name:		dtn
 Version:	2.6.0
-Release:	%mkrel 2
+Release:	3
 License:	Apache License
 Group:		System/Servers
 URL:		https://sourceforge.net/projects/dtn/
@@ -22,7 +22,7 @@ Requires(preun): rpm-helper
 Requires(pre): rpm-helper
 Requires(postun): rpm-helper
 BuildRequires:	autoconf
-BuildRequires:	db4-devel
+BuildRequires:	db-devel
 BuildRequires:	doxygen
 BuildRequires:	google-perftools-devel
 BuildRequires:	libbluez-devel
