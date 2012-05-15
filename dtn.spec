@@ -103,9 +103,9 @@ This package contains the static DTN library and its header files.
 %prep
 
 %setup -q -n dtn-%{version}
-%patch0 -p1
+#%patch0 -p1
 %patch1 -p0
-%patch2 -p0
+#%patch2 -p0
 %patch3 -p0
 
 find . -type d -perm 0700 -exec chmod 755 {} \;
