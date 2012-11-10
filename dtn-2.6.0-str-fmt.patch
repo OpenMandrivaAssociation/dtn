@@ -1,0 +1,66 @@
+--- apps/dtntunnel/IPTunnel.h.str	2009-01-30 14:42:03.000000000 +0100
++++ apps/dtntunnel/IPTunnel.h	2009-01-30 14:42:14.000000000 +0100
+@@ -31,7 +31,7 @@
+ public:
+     /// Constructor
+     IPTunnel(const char* classname, const char* logpath)
+-        : Logger(classname, logpath) {}
++        : Logger(classname, "%s", logpath) {}
+     
+     /// Destructor
+     virtual ~IPTunnel() {}
+--- servlib/DTNServer.cc.str	2009-01-30 14:29:29.000000000 +0100
++++ servlib/DTNServer.cc	2009-01-30 14:29:53.000000000 +0100
+@@ -70,7 +70,7 @@
+ 
+ DTNServer::DTNServer(const char* logpath,
+                      DTNStorageConfig* storage_config)
+-    : Logger("DTNServer", logpath),
++    : Logger("DTNServer", "%s", logpath),
+       init_(false),
+       in_shutdown_(0),
+       storage_config_(storage_config),
+--- servlib/bundling/BundleEventHandler.h.str	2009-01-30 14:25:39.000000000 +0100
++++ servlib/bundling/BundleEventHandler.h	2009-01-30 14:28:48.000000000 +0100
+@@ -43,7 +43,7 @@
+      */
+     BundleEventHandler(const char* classname,
+                        const char* logpath)
+-        : oasys::Logger(classname, logpath) {}
++        : oasys::Logger(classname, "%s", logpath) {}
+     
+     /**
+      * Destructor -- Needs to be defined virtual to be sure that
+--- servlib/conv_layers/CLConnection.cc.str	2009-01-30 14:32:21.000000000 +0100
++++ servlib/conv_layers/CLConnection.cc	2009-01-30 14:32:37.000000000 +0100
+@@ -35,7 +35,7 @@
+                            LinkParams*       params,
+                            bool              active_connector)
+     : Thread(classname),
+-      Logger(classname, logpath),
++      Logger(classname, "%s", logpath),
+       contact_(classname),
+       contact_up_(false),
+       cmdqueue_lock_(),
+--- servlib/discovery/Announce.h.str	2009-01-30 14:34:14.000000000 +0100
++++ servlib/discovery/Announce.h	2009-01-30 14:34:29.000000000 +0100
+@@ -95,7 +95,7 @@
+ 
+ protected:
+     Announce(const char* logpath = "/dtn/discovery/announce")
+-        : oasys::Logger("Announce",logpath),
++        : oasys::Logger("Announce","%s",logpath),
+           cl_(NULL), interval_(0)
+     {
+         ::gettimeofday(&data_sent_,0);
+--- servlib/routing/ExternalRouter.cc.str	2009-01-30 14:37:45.000000000 +0100
++++ servlib/routing/ExternalRouter.cc	2009-01-30 14:38:10.000000000 +0100
+@@ -55,7 +55,7 @@
+     send(message);
+ 
+ #define CATCH(exception) \
+-    catch (exception &e) { log_warn(e.what()); }
++    catch (exception &e) { log_warn("%s",e.what()); }
+ 
+ namespace dtn {
+ 

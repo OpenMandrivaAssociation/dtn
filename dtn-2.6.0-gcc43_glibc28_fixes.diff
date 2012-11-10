@@ -1,0 +1,140 @@
+diff -Naurp dtn-2.6.0/servlib/bundling/SequenceID.cc dtn-2.6.0.oden/servlib/bundling/SequenceID.cc
+--- dtn-2.6.0/servlib/bundling/SequenceID.cc	2008-07-21 18:17:23.000000000 +0200
++++ dtn-2.6.0.oden/servlib/bundling/SequenceID.cc	2008-07-21 18:08:36.000000000 +0200
+@@ -19,6 +19,7 @@
+ #endif
+ 
+ #include <ctype.h>
++#include <string.h>
+ #include <oasys/util/SafeRange.h>
+ #include <oasys/util/StringAppender.h>
+ #include <oasys/util/StringBuffer.h>
+diff -Naurp dtn-2.6.0/servlib/cmd/BundleCommand.cc dtn-2.6.0.oden/servlib/cmd/BundleCommand.cc
+--- dtn-2.6.0/servlib/cmd/BundleCommand.cc	2008-07-21 18:17:23.000000000 +0200
++++ dtn-2.6.0.oden/servlib/cmd/BundleCommand.cc	2008-07-21 18:05:20.000000000 +0200
+@@ -18,6 +18,8 @@
+ #  include <dtn-config.h>
+ #endif
+ 
++#include <climits>
++
+ #include <oasys/util/HexDumpBuffer.h>
+ #include <oasys/util/StringBuffer.h>
+ #include <oasys/util/OptParser.h>
+diff -Naurp dtn-2.6.0/servlib/cmd/DiscoveryCommand.cc dtn-2.6.0.oden/servlib/cmd/DiscoveryCommand.cc
+--- dtn-2.6.0/servlib/cmd/DiscoveryCommand.cc	2008-07-21 18:17:23.000000000 +0200
++++ dtn-2.6.0.oden/servlib/cmd/DiscoveryCommand.cc	2008-07-21 18:05:20.000000000 +0200
+@@ -18,6 +18,8 @@
+ #  include <dtn-config.h>
+ #endif
+ 
++#include <climits>
++
+ #include "DiscoveryCommand.h"
+ #include "discovery/Discovery.h"
+ #include "discovery/DiscoveryTable.h"
+diff -Naurp dtn-2.6.0/servlib/cmd/InterfaceCommand.cc dtn-2.6.0.oden/servlib/cmd/InterfaceCommand.cc
+--- dtn-2.6.0/servlib/cmd/InterfaceCommand.cc	2008-07-21 18:17:23.000000000 +0200
++++ dtn-2.6.0.oden/servlib/cmd/InterfaceCommand.cc	2008-07-21 18:05:20.000000000 +0200
+@@ -18,6 +18,8 @@
+ #  include <dtn-config.h>
+ #endif
+ 
++#include <climits>
++
+ #include "InterfaceCommand.h"
+ #include "contacts/InterfaceTable.h"
+ #include "conv_layers/ConvergenceLayer.h"
+diff -Naurp dtn-2.6.0/servlib/cmd/RegistrationCommand.cc dtn-2.6.0.oden/servlib/cmd/RegistrationCommand.cc
+--- dtn-2.6.0/servlib/cmd/RegistrationCommand.cc	2008-07-21 18:17:23.000000000 +0200
++++ dtn-2.6.0.oden/servlib/cmd/RegistrationCommand.cc	2008-07-21 18:05:20.000000000 +0200
+@@ -18,6 +18,8 @@
+ #  include <dtn-config.h>
+ #endif
+ 
++#include <climits>
++
+ #include <oasys/serialize/TclListSerialize.h>
+ #include <oasys/thread/Notifier.h>
+ #include <oasys/util/StringBuffer.h>
+diff -Naurp dtn-2.6.0/servlib/conv_layers/ECLModule.cc dtn-2.6.0.oden/servlib/conv_layers/ECLModule.cc
+--- dtn-2.6.0/servlib/conv_layers/ECLModule.cc	2008-07-21 18:17:23.000000000 +0200
++++ dtn-2.6.0.oden/servlib/conv_layers/ECLModule.cc	2008-07-21 18:05:20.000000000 +0200
+@@ -17,6 +17,8 @@
+ #  include <dtn-config.h>
+ #endif
+ 
++#include <typeinfo>
++
+ #if defined(XERCES_C_ENABLED) && defined(EXTERNAL_CL_ENABLED)
+ 
+ #include <oasys/io/NetUtils.h>
+diff -Naurp dtn-2.6.0/servlib/discovery/BluetoothDiscovery.cc dtn-2.6.0.oden/servlib/discovery/BluetoothDiscovery.cc
+--- dtn-2.6.0/servlib/discovery/BluetoothDiscovery.cc	2008-07-21 18:17:23.000000000 +0200
++++ dtn-2.6.0.oden/servlib/discovery/BluetoothDiscovery.cc	2008-07-21 18:05:20.000000000 +0200
+@@ -18,6 +18,8 @@
+ #  include <dtn-config.h>
+ #endif
+ 
++#include <climits>
++
+ #ifdef OASYS_BLUETOOTH_ENABLED
+ 
+ #include <oasys/util/Random.h>
+diff -Naurp dtn-2.6.0/servlib/discovery/IPDiscovery.cc dtn-2.6.0.oden/servlib/discovery/IPDiscovery.cc
+--- dtn-2.6.0/servlib/discovery/IPDiscovery.cc	2008-07-21 18:17:23.000000000 +0200
++++ dtn-2.6.0.oden/servlib/discovery/IPDiscovery.cc	2008-07-21 18:05:20.000000000 +0200
+@@ -18,6 +18,8 @@
+ #  include <dtn-config.h>
+ #endif
+ 
++#include <climits>
++
+ #include <oasys/util/OptParser.h>
+ #include <oasys/util/StringBuffer.h>
+ #include "bundling/BundleDaemon.h"
+diff -Naurp dtn-2.6.0/servlib/prophet/Ack.h dtn-2.6.0.oden/servlib/prophet/Ack.h
+--- dtn-2.6.0/servlib/prophet/Ack.h	2008-07-21 18:17:23.000000000 +0200
++++ dtn-2.6.0.oden/servlib/prophet/Ack.h	2008-07-21 18:05:20.000000000 +0200
+@@ -18,6 +18,7 @@
+ #define _PROPHET_ACK_H_
+ 
+ #include <string>
++#include <sys/types.h>
+ 
+ namespace prophet
+ {
+diff -Naurp dtn-2.6.0/servlib/prophet/BaseTLV.h dtn-2.6.0.oden/servlib/prophet/BaseTLV.h
+--- dtn-2.6.0/servlib/prophet/BaseTLV.h	2008-07-21 18:17:23.000000000 +0200
++++ dtn-2.6.0.oden/servlib/prophet/BaseTLV.h	2008-07-21 18:05:20.000000000 +0200
+@@ -19,6 +19,7 @@
+ 
+ #include <unistd.h>
+ #include <sys/types.h>
++#include <stddef.h>
+ 
+ 
+ namespace prophet
+diff -Naurp dtn-2.6.0/servlib/prophet/RIBTLV.cc dtn-2.6.0.oden/servlib/prophet/RIBTLV.cc
+--- dtn-2.6.0/servlib/prophet/RIBTLV.cc	2008-07-21 18:17:23.000000000 +0200
++++ dtn-2.6.0.oden/servlib/prophet/RIBTLV.cc	2008-07-21 18:05:20.000000000 +0200
+@@ -15,6 +15,7 @@
+  */
+ 
+ #include <arpa/inet.h> // for hton[ls] and ntoh[ls]
++#include <string.h> // for memset
+ #include "Util.h"
+ #include "RIBTLV.h"
+ 
+diff -Naurp dtn-2.6.0/servlib/reg/TclRegistration.cc dtn-2.6.0.oden/servlib/reg/TclRegistration.cc
+--- dtn-2.6.0/servlib/reg/TclRegistration.cc	2008-07-21 18:17:23.000000000 +0200
++++ dtn-2.6.0.oden/servlib/reg/TclRegistration.cc	2008-07-21 18:05:21.000000000 +0200
+@@ -18,6 +18,8 @@
+ #  include <dtn-config.h>
+ #endif
+ 
++#include <limits.h>
++
+ #include <oasys/serialize/TclListSerialize.h>
+ #include <oasys/util/ScratchBuffer.h>
+ 

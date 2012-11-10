@@ -1,0 +1,10 @@
+--- servlib/prophet/BundleCore.h.gcc	2010-11-21 11:20:29.000000000 +0000
++++ servlib/prophet/BundleCore.h	2010-11-21 11:20:48.000000000 +0000
+@@ -27,6 +27,7 @@
+ #include <stdarg.h>
+ #include <string>
+ #include <list>
++#include <cstdio>
+ 
+ #if defined(__GNUC__)
+ # define PRINTFLIKE(fmt, arg) __attribute__((format (printf, fmt, arg)))

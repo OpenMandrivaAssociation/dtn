@@ -1,0 +1,5 @@
+sources:
+  "dtn-2.8.0.tgz:"	e637edb07da89d042a2c79ea6f92b109f47bb1d5
+  "dtnd.init:"	9c41e3097785e053b41875a164991c82ff07eea4
+  "dtnd.logrotate:"	d9988411a27daf2cd1ab1d436d003e06ddb2d665
+  "dtnd.sysconfig:"	9d1905772f046f17fde4a5de8b43dd238541bc45

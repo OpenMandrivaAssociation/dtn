@@ -1,0 +1,29 @@
+--- applib/Makefile	2008-07-21 19:00:08.000000000 +0200
++++ applib/Makefile.oden	2008-07-21 19:11:52.000000000 +0200
+@@ -135,7 +135,7 @@
+ .PHONY: tclapi
+ tclapi: tcl/libdtntcl-$(VSHLIB)
+ tcl/libdtntcl-$(VSHLIB): tcl/dtn_api_wrap_tcl.o libdtnapi-$(VSHLIB)
+-	$(CXX) $(CXXFLAGS) $< $(LDFLAGS_SHLIB) $(LDFLAGS) \
++	$(CXX) $(CXXFLAGS) $< $(LDFLAGS_SHLIB) -Wl,-soname=libdtntcl-$(VSHLIB) $(LDFLAGS) \
+ 		-ldtnapi-$(DTN_VERSION) $(TCL_LDFLAGS) -o $@
+ 
+ #
+@@ -196,7 +196,7 @@
+ 
+ libdtnapi-$(VSHLIB): $(CLIENTLIB_OBJS)
+ 	rm -f $@
+-	$(CXX) $(CXXFLAGS) $^ $(LDFLAGS_SHLIB) $(LDFLAGS) -o $@
++	$(CXX) $(CXXFLAGS) $^ -Wl,-soname=libdtnapi-$(VSHLIB) $(LDFLAGS_SHLIB) $(LDFLAGS) -o $@
+ 
+ libdtnapi++-$(VLIB): $(CLIENT_EXTRA_OBJS)
+ 	rm -f $@
+@@ -205,7 +205,7 @@
+ 
+ libdtnapi++-$(VSHLIB): $(CLIENT_EXTRA_OBJS) libdtnapi.a
+ 	rm -f $@
+-	$(CXX) $(CXXFLAGS) $^ $(LDFLAGS_SHLIB) $(OASYS_LDFLAGS) libdtnapi.a $(LDFLAGS) -o $@
++	$(CXX) $(CXXFLAGS) $^ -Wl,-soname=libdtnapi++-$(VSHLIB) $(LDFLAGS_SHLIB) $(OASYS_LDFLAGS) libdtnapi.a $(LDFLAGS) -o $@
+ 
+ libdtnapisrv.a: $(SERVERLIB_OBJS)
+ 	rm -f $@
